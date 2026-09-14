@@ -326,7 +326,7 @@ strong,b{font-weight:600}
   transition:transform .6s var(--ease);
 }
 .hero__portrait:hover .portrait{transform:rotate(0deg) scale(1.015)}
-.portrait img{width:100%;height:100%;object-fit:cover;object-position:center 22%}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:center bottom}
 .portrait__fallback{
   position:absolute;inset:0;display:none;place-items:center;
   font-family:var(--fm);font-weight:700;font-size:8rem;color:var(--accent);
