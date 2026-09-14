@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Frillian — Computer Science Student &amp; Content Creator</title>
+<meta name="description" content="Frillian — Computer Science student at BINUS University, Software Engineer Intern at Qpro building clinical software for Indonesian hospitals, and basketball content creator behind @drillian_basketball." />
+<meta name="author" content="Frillian" />
+<meta name="theme-color" content="#FBFAF7" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Frillian — Computer Science Student &amp; Content Creator" />
+<meta property="og:description" content="I build hospital software in .NET and basketball content for 130k+ people. Portfolio for Apple Developer Academy." />
+<meta property="og:image" content="assets/img/frillian.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23FF5C29'/><text x='50' y='72' font-size='62' font-family='monospace' font-weight='700' fill='white' text-anchor='middle'>F</text></svg>" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+<div class="scroll-progress" aria-hidden="true"><span id="progressBar"></span></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+<a class="skip-link" href="#about">Skip to content</a>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="nav__brand" href="#top" aria-label="Frillian — home">
+      <span class="nav__mark">F</span>
+      <span class="nav__name">frillian<span class="dot">.</span></span>
+    </a>
+
+    <nav class="nav__links" aria-label="Section navigation">
+      <a href="#about">About</a>
+      <a href="#numbers">Numbers</a>
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#toolkit">Toolkit</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="nav__actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch colour theme">
+        <svg class="ico ico--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><g class="rays"><path d="M12 1.8v3M12 19.2v3M1.8 12h3M19.2 12h3M4.8 4.8l2.1 2.1M17.1 17.1l2.1 2.1M19.2 4.8l-2.1 2.1M6.9 17.1l-2.1 2.1"/></g></svg>
+        <svg class="ico ico--moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
+      </button>
+      <a class="btn btn--sm btn--solid" href="#contact">Let's talk</a>
+      <button class="nav__burger" id="burger" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero__grid-bg" aria-hidden="true"></div>
+  <div class="blob blob--a" aria-hidden="true"></div>
+  <div class="blob blob--b" aria-hidden="true"></div>
+
+  <div class="wrap hero__inner">
+    <div class="hero__copy">
+      <p class="chip reveal"><span class="chip__pulse"></span> Applying to Apple Developer Academy</p>
+
+      <h1 class="hero__title reveal" data-reveal-delay="60">
+        <span class="hero__line">FRIL</span><span class="hero__line hero__line--out">LIAN</span>
+      </h1>
+
+      <p class="hero__roles reveal" data-reveal-delay="120">
+        <span class="mono">&gt;</span>
+        <span class="rotator" id="rotator" aria-live="polite"><span class="rotator__word">Computer Science student</span></span><span class="caret" aria-hidden="true"></span>
+      </p>
+
+      <p class="hero__lede reveal" data-reveal-delay="180">
+        I build clinical software that nurses actually use — real-time ICU monitoring and hospital
+        records in <strong>.NET</strong> and <strong>SQL Server</strong>. Off the keyboard, I've spent four years
+        teaching Indonesian kids to play basketball on the internet, to an audience of
+        <strong>130k+</strong>.
+      </p>
+
+      <div class="hero__cta reveal" data-reveal-delay="240">
+        <a class="btn btn--solid magnetic" href="#work">
+          See the work
+          <svg viewBox="0 0 24 24" class="btn__arrow" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+        </a>
+        <a class="btn btn--ghost magnetic" href="https://www.instagram.com/drillian_basketball/" target="_blank" rel="noopener">
+          @drillian_basketball
+        </a>
+      </div>
+
+      <ul class="hero__meta reveal" data-reveal-delay="300">
+        <li><span class="mono">LOC</span> Jakarta, Indonesia · GMT+7</li>
+        <li><span class="mono">EDU</span> BINUS University, CS '27</li>
+      </ul>
+    </div>
+
+    <div class="hero__portrait reveal" data-reveal-delay="150">
+      <div class="portrait" id="portrait">
+        <img src="assets/img/frillian.jpg" alt="Portrait of Frillian" id="portraitImg" width="880" height="1100" />
+        <span class="portrait__fallback" aria-hidden="true">F</span>
+        <span class="portrait__scan" aria-hidden="true"></span>
+      </div>
+
+      <div class="float-badge float-badge--1" aria-hidden="true">
+        <span class="float-badge__n">31M</span><span class="float-badge__l">views, one video</span>
+      </div>
+      <div class="float-badge float-badge--2" aria-hidden="true">
+        <span class="float-badge__n">11</span><span class="float-badge__l">ICU calculators shipped</span>
+      </div>
+      <div class="float-badge float-badge--3" aria-hidden="true">
+        <span class="float-badge__n">60+</span><span class="float-badge__l">brands worked with</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero__strip reveal">
+      <div class="strip__item"><b data-count="130" data-suffix="k+">0</b><span>total followers</span></div>
+      <div class="strip__item"><b data-count="2" data-suffix="">0</b><span>hospital systems built</span></div>
+      <div class="strip__item"><b data-count="18" data-suffix="">0</b><span>campaigns with HiLo Teen</span></div>
+      <div class="strip__item"><b data-count="1" data-suffix="">0</b><span>video bought by Google</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about">
+  <div class="wrap">
+    <p class="section__label reveal"><span class="mono">01</span> Profile</p>
+
+    <div class="about">
+      <h2 class="section__title reveal">
+        Half of me writes software that has to be right.<br class="br-md" />
+        <span class="hl">The other half makes people press play.</span>
+      </h2>
+
+      <div class="about__body">
+        <div class="about__text reveal" data-reveal-delay="80">
+          <p>
+            I'm a Computer Science student at <strong>BINUS University</strong> and a Software Engineer Intern at
+            <strong>Qpro</strong>, where I build clinical software for Indonesian hospitals — a real-time ICU
+            monitoring system and a hospital-wide Electronic Medical Record, both in .NET and SQL Server.
+          </p>
+          <p>
+            I like problems where software has to be <em>right</em>, not just pretty, because someone is making a
+            decision from what's on the screen. A wrong threshold in a severity score changes a patient's
+            mortality prediction. That pressure is the part I enjoy.
+          </p>
+          <p>
+            Outside engineering I run <strong>@drillian_basketball</strong>, a basketball education brand I grew
+            organically to 63k on Instagram and 66k on TikTok, and I'm the on-camera face of
+            <strong>Ballerbro</strong>. Sixty-plus brands later, I've learned the same lesson twice: consistency
+            beats a single good idea, and you have to design for the person on the other side of the screen.
+          </p>
+        </div>
+
+        <ul class="about__cards">
+          <li class="card reveal" data-reveal-delay="100">
+            <span class="card__ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 18h3.2l1.9-5.4 2.6 8.1 2.3-9.4 1.9 6.7 1.3-4.2h4.8"/><path d="M4 10V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5"/></svg>
+            </span>
+            <h3>Healthcare domain</h3>
+            <p>ICU monitoring and EMR modules built to Indonesian hospital documentation standards.</p>
+          </li>
+          <li class="card reveal" data-reveal-delay="160">
+            <span class="card__ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="2.5" y="5.5" width="19" height="13" rx="2.5"/><path d="m10 9.8 4.6 2.7L10 15.2Z"/></svg>
+            </span>
+            <h3>Content that travels</h3>
+            <p>Scripting, shooting and editing — from a phone in a gym to 31M views on a brand account.</p>
+          </li>
+          <li class="card reveal" data-reveal-delay="220">
+            <span class="card__ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 9.5 7 6l4.2 2.4a2 2 0 0 0 2 0L17 6l4 3.5"/><path d="M21 9.5v5l-4.5 4-3-2.6-2.4 1.4a1.8 1.8 0 0 1-2.4-.7L3 14.5v-5"/></svg>
+            </span>
+            <h3>Brand &amp; negotiation</h3>
+            <p>Pricing, contracts and long-term partnerships with 60+ national and international brands.</p>
+          </li>
+          <li class="card reveal" data-reveal-delay="280">
+            <span class="card__ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18M5.3 5.3c3.6 3.6 3.6 9.8 0 13.4M18.7 5.3c-3.6 3.6-3.6 9.8 0 13.4"/></svg>
+            </span>
+            <h3>Leading a team</h3>
+            <p>Ran a DBL school basketball squad — players, dance team, supporters, logistics, paperwork.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NUMBERS ============ -->
+<section class="section section--tint" id="numbers">
+  <div class="wrap">
+    <p class="section__label reveal"><span class="mono">02</span> By the numbers</p>
+    <h2 class="section__title reveal">Four years of showing up, counted.</h2>
+
+    <div class="numbers">
+      <div class="num reveal">
+        <b data-count="63" data-suffix="k+">0</b>
+        <span class="num__l">Instagram followers</span>
+        <span class="num__s mono">@drillian_basketball · organic</span>
+      </div>
+      <div class="num reveal" data-reveal-delay="60">
+        <b data-count="66" data-suffix="k+">0</b>
+        <span class="num__l">TikTok followers</span>
+        <span class="num__s mono">basketball drills &amp; tutorials</span>
+      </div>
+      <div class="num reveal" data-reveal-delay="120">
+        <b data-count="21.9" data-decimals="1" data-suffix="M">0</b>
+        <span class="num__l">Views, best IG video</span>
+        <span class="num__s mono">plus an 8M-view TikTok</span>
+      </div>
+      <div class="num reveal" data-reveal-delay="180">
+        <b data-count="31" data-suffix="M+">0</b>
+        <span class="num__l">Views, HiLo Teen collab</span>
+        <span class="num__s mono">on their official account</span>
+      </div>
+      <div class="num reveal" data-reveal-delay="240">
+        <b data-count="60" data-suffix="+">0</b>
+        <span class="num__l">Brand partnerships</span>
+        <span class="num__s mono">national &amp; international</span>
+      </div>
+      <div class="num reveal" data-reveal-delay="300">
+        <b data-count="11" data-suffix="">0</b>
+        <span class="num__l">Clinical calculators built</span>
+        <span class="num__s mono">SOFA, APACHE II, MEWS, PEWS…</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORK ============ -->
+<section class="section" id="work">
+  <div class="wrap">
+    <p class="section__label reveal"><span class="mono">03</span> Selected work</p>
+    <h2 class="section__title reveal">Things I built and things I made.</h2>
+    <p class="section__sub reveal">Two hospital systems, one basketball brand, and the video that Google bought.</p>
+
+    <div class="work">
+
+      <!-- CCIS -->
+      <article class="proj proj--wide reveal">
+        <div class="proj__head">
+          <span class="proj__tag mono">Qpro · Group project · .NET Blazor + SQL Server</span>
+          <h3 class="proj__title">CCIS ICU</h3>
+          <p class="proj__kicker">Critical Care Information System</p>
+        </div>
+        <p class="proj__desc">
+          A real-time monitoring system for a hospital ICU central nurse station — vital signs, ventilator
+          settings, lab diagnostics and clinical severity scores on a single screen.
+        </p>
+        <div class="proj__cols">
+          <div>
+            <h4 class="mono">My role</h4>
+            <ul class="tick">
+              <li><b>Vitals</b> — 24-hour multi-parameter trend charting</li>
+              <li><b>Diagnostic</b> — lab results with reference ranges, ABG, microbiology and imaging panels</li>
+              <li><b>Clinical calculators</b> — 11 validated scores: SOFA, SAPS II, APACHE II, qSOFA, SIRS, GCS, RASS, CAM-ICU, MEWS, PEWS, NEWS</li>
+              <li><b>Settings</b> — ward-level alarm thresholds and parameter configuration</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="mono">Impact</h4>
+            <p>Scoring that ICU nurses normally do by hand — and skip when a ward is busy — became guided forms with saved history and automatic interpretation. Alarm limits moved out of hard-coded values into ward settings, so one system fits different units without a code change.</p>
+            <h4 class="mono mt">What I learned</h4>
+            <p>Implementing a clinical score correctly means reading the source literature, not copying a table off the internet — SOFA traces back to Vincent et al., 1996. In a medical interface, colour and layout are safety features.</p>
+          </div>
+        </div>
+        <ul class="pills">
+          <li>.NET Blazor</li><li>C#</li><li>SQL Server</li><li>Real-time</li><li>Data visualisation</li>
+        </ul>
+      </article>
+
+      <!-- RSSE -->
+      <article class="proj proj--wide reveal">
+        <div class="proj__head">
+          <span class="proj__tag mono">Qpro · Group project · .NET 9 + SQL Server</span>
+          <h3 class="proj__title">RSSE EMR</h3>
+          <p class="proj__kicker">Sphaira Elisabeth Hospital — Electronic Medical Record</p>
+        </div>
+        <p class="proj__desc">
+          A new EMR replacing paper-based clinical documentation across inpatient and outpatient care.
+          I built the clinical documentation side.
+        </p>
+        <div class="proj__cols">
+          <div>
+            <h4 class="mono">My role</h4>
+            <ul class="tick">
+              <li>SOAP notes and diagnosis coding</li>
+              <li>CMS — chief complaint, history of present illness, physical exam, review of systems</li>
+              <li>Allergies, problems and antibiotics</li>
+              <li>Physical examination forms, body diagram, patient information</li>
+              <li>Nursing assessment</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="mono">Impact</h4>
+            <p>These modules run on a template system rather than hard-coded pages, so the hospital can serve dozens of assessment forms — adult inpatient, paediatric outpatient, geriatric, obstetric, dental — through one interface. Clinical history that used to live on paper became searchable and reusable across episodes.</p>
+            <h4 class="mono mt">What I learned</h4>
+            <p>Healthcare software is mostly data modelling, not screens. A "physical exam" is a different form for every specialty, so the real problem was a structure flexible enough to hold all of them without becoming unusable for the nurse filling it in.</p>
+          </div>
+        </div>
+        <ul class="pills">
+          <li>.NET 9</li><li>C#</li><li>SQL Server</li><li>Template systems</li><li>Data modelling</li>
+        </ul>
+      </article>
+
+      <!-- Drillian -->
+      <article class="proj reveal">
+        <div class="proj__head">
+          <span class="proj__tag mono">Personal brand · 2023 → now</span>
+          <h3 class="proj__title">@drillian_basketball</h3>
+          <p class="proj__kicker">Basketball education for Indonesian youth</p>
+        </div>
+        <p class="proj__desc">
+          Drills, tutorials and tips — built from zero to 63k Instagram, 66k TikTok and 1.2k YouTube
+          subscribers, entirely organic. One IG video hit 21.9M views, one TikTok hit 8M.
+        </p>
+        <ul class="pills">
+          <li>Scriptwriting</li><li>Shooting</li><li>CapCut</li><li>Audience growth</li>
+        </ul>
+        <a class="proj__link" href="https://www.instagram.com/drillian_basketball/" target="_blank" rel="noopener">
+          Open Instagram
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+      </article>
+
+      <!-- Ballerbro -->
+      <article class="proj reveal" data-reveal-delay="60">
+        <div class="proj__head">
+          <span class="proj__tag mono">Brand ambassador · 2021 → now</span>
+          <h3 class="proj__title">Ballerbro</h3>
+          <p class="proj__kicker">Face of a local basketball apparel &amp; footwear label</p>
+        </div>
+        <p class="proj__desc">
+          Main on-camera talent for @ballerbroidn and @ballerbrostore — daily TikTok and Instagram content
+          around launches, shoots and community moments. One TikTok passed 7M views.
+        </p>
+        <ul class="pills">
+          <li>On-camera talent</li><li>Product launches</li><li>Daily content</li>
+        </ul>
+        <a class="proj__link" href="https://www.instagram.com/ballerbroidn/" target="_blank" rel="noopener">
+          Open Instagram
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+      </article>
+
+      <!-- Google -->
+      <article class="proj proj--feature reveal">
+        <div class="proj__head">
+          <span class="proj__tag mono">Licensed by Google · Year in Search 2024</span>
+          <h3 class="proj__title">The "Night Night" video</h3>
+          <p class="proj__kicker">A fun idea that went global</p>
+        </div>
+        <p class="proj__desc">
+          I recreated Stephen Curry's "Night Night" celebration. Google noticed, bought the clip for
+          <strong>$750</strong>, and published it in their official <em>Year in Search 2024 — Breakout Search</em>
+          video. Five seconds of footage, on one of the biggest channels on the internet.
+        </p>
+        <p class="quote">
+          “@stephcurry put other celebrations to… Night Night is a Breakout Search of 2024 #YearInSearch”
+        </p>
+        <h4 class="mono">What I learned</h4>
+        <ul class="tick">
+          <li>Original, authentic ideas create opportunities you cannot plan for</li>
+          <li>Content rights, ownership and professional agreements matter when a global company calls</li>
+          <li>English is not optional in this line of work</li>
+        </ul>
+      </article>
+
+      <!-- HiLo -->
+      <article class="proj proj--wide reveal">
+        <div class="proj__head">
+          <span class="proj__tag mono">Top collaboration · 2023 → now</span>
+          <h3 class="proj__title">HiLo Teen</h3>
+          <p class="proj__kicker">18 collaborations, built on trust</p>
+        </div>
+        <p class="proj__desc">
+          Thirteen campaigns plus five ongoing — my strongest and longest-running brand relationship.
+        </p>
+        <div class="proj__cols">
+          <div>
+            <h4 class="mono">Impact</h4>
+            <p>The video collab on HiLo Teen's official account passed <strong>31M views</strong>, moving both engagement and sales. It's the clearest evidence I have that a collaboration delivers real results rather than a vanity number.</p>
+          </div>
+          <div>
+            <h4 class="mono">What I learned</h4>
+            <p>Eighteen collaborations don't happen because of one good video. They happen because the brand message and the basketball content keep lining up, campaign after campaign — consistent value first, then trust, then the long-term deal.</p>
+          </div>
+        </div>
+        <ul class="pills">
+          <li>Long-term partnership</li><li>Brand messaging</li><li>Repeat campaigns</li>
+        </ul>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<section class="marquee-section" aria-label="Brands I have worked with">
+  <div class="wrap">
+    <p class="section__label reveal"><span class="mono">04</span> 60+ brands</p>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Li-Ning</span><i>●</i><span>361 Degrees</span><i>●</i><span>HiLo Teen</span><i>●</i><span>CLEAR</span><i>●</i><span>Garnier</span><i>●</i><span>Red Bull</span><i>●</i><span>Google</span><i>●</i><span>Ballerbro</span><i>●</i>
+      <span>Li-Ning</span><i>●</i><span>361 Degrees</span><i>●</i><span>HiLo Teen</span><i>●</i><span>CLEAR</span><i>●</i><span>Garnier</span><i>●</i><span>Red Bull</span><i>●</i><span>Google</span><i>●</i><span>Ballerbro</span><i>●</i>
+    </div>
+  </div>
+  <div class="marquee marquee--rev" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Viral content</span><i>●</i><span>Brand ambassador</span><i>●</i><span>Scriptwriting</span><i>●</i><span>Negotiation</span><i>●</i><span>Product shoots</span><i>●</i><span>Community</span><i>●</i>
+      <span>Viral content</span><i>●</i><span>Brand ambassador</span><i>●</i><span>Scriptwriting</span><i>●</i><span>Negotiation</span><i>●</i><span>Product shoots</span><i>●</i><span>Community</span><i>●</i>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section class="section" id="experience">
+  <div class="wrap">
+    <p class="section__label reveal"><span class="mono">05</span> Experience</p>
+    <h2 class="section__title reveal">Where the work happened.</h2>
+    <p class="section__sub reveal">Newest first. The live ones have a pulse.</p>
+
+    <ol class="timeline">
+      <li class="tl reveal">
+        <span class="tl__dot tl__dot--live" aria-hidden="true"></span>
+        <div class="tl__when mono">Feb 2026 — present</div>
+        <div class="tl__body">
+          <h3>Software Engineer Intern</h3>
+          <p class="tl__org">Qpro — Connecting Healthcare</p>
+          <ul class="tick">
+            <li>Build clinical modules for a real-time ICU monitoring system (CCIS ICU) and a hospital EMR (RSSE) with .NET Blazor and SQL Server.</li>
+            <li>Built 11 clinical scoring calculators — SOFA, APACHE II, MEWS, PEWS, NEWS and others — with saved history and automatic interpretation.</li>
+            <li>Built SOAP notes, physical exam and nursing assessment modules.</li>
+          </ul>
+          <ul class="pills"><li>C#</li><li>.NET Blazor</li><li>.NET 9</li><li>SQL Server</li><li>EMR</li></ul>
+        </div>
+      </li>
+
+      <li class="tl reveal">
+        <span class="tl__dot tl__dot--live" aria-hidden="true"></span>
+        <div class="tl__when mono">Jan 2023 — present</div>
+        <div class="tl__body">
+          <h3>Content Creator — Personal Branding</h3>
+          <p class="tl__org">@drillian_basketball</p>
+          <ul class="tick">
+            <li>Grew my own basketball education brand to 63k+ Instagram, 66k+ TikTok and 1k+ YouTube followers, all organic.</li>
+            <li>Made viral content including an Instagram video with 21.9M views and a TikTok with 8M views.</li>
+            <li>Worked with 60+ brands (Li-Ning, 361 Degrees, CLEAR, Garnier) and had a video bought by Google for "Year in Search".</li>
+          </ul>
+          <ul class="pills"><li>Content strategy</li><li>Editing</li><li>Partnerships</li></ul>
+        </div>
+      </li>
+
+      <li class="tl reveal">
+        <span class="tl__dot tl__dot--live" aria-hidden="true"></span>
+        <div class="tl__when mono">Nov 2021 — present</div>
+        <div class="tl__body">
+          <h3>Content Creator &amp; Brand Ambassador</h3>
+          <p class="tl__org">@ballerbroidn &amp; @ballerbroStore</p>
+          <ul class="tick">
+            <li>Became the face of Ballerbro, a local basketball apparel and footwear brand, creating daily content around launches and community moments.</li>
+            <li>Produced viral hits including a TikTok video with 7M+ views.</li>
+          </ul>
+          <ul class="pills"><li>On-camera</li><li>Brand identity</li><li>Daily publishing</li></ul>
+        </div>
+      </li>
+
+      <li class="tl reveal">
+        <span class="tl__dot" aria-hidden="true"></span>
+        <div class="tl__when mono">May 2025 — Jun 2025</div>
+        <div class="tl__body">
+          <h3>Community Service Volunteer</h3>
+          <p class="tl__org">PAUD SPS Lely Delima</p>
+          <ul class="tick">
+            <li>Supported early childhood learning sessions, guiding kids and engaging with the community as part of BINUS University's service program.</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="tl reveal">
+        <span class="tl__dot" aria-hidden="true"></span>
+        <div class="tl__when mono">Jul 2022 — Nov 2022</div>
+        <div class="tl__body">
+          <h3>Team Leader</h3>
+          <p class="tl__org">DBL School Basketball Team</p>
+          <ul class="tick">
+            <li>Led my school basketball team in DBL, coordinating players, dance team and supporters while handling court rentals, registrations and documents.</li>
+            <li>Delegated tasks effectively and kept the team motivated through the season.</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ TOOLKIT ============ -->
+<section class="section section--tint" id="toolkit">
+  <div class="wrap">
+    <p class="section__label reveal"><span class="mono">06</span> Toolkit</p>
+    <h2 class="section__title reveal">What I work with.</h2>
+
+    <div class="kit">
+      <div class="kit__col reveal">
+        <h3 class="mono">Technical</h3>
+        <ul>
+          <li>C#</li><li>.NET Blazor</li><li>.NET 9</li><li>SQL Server</li>
+          <li>JavaScript</li><li>HTML &amp; CSS</li><li>Git &amp; GitHub</li>
+          <li>Healthcare systems (EMR, ICU, clinical scoring)</li>
+        </ul>
+      </div>
+      <div class="kit__col reveal" data-reveal-delay="80">
+        <h3 class="mono">Content &amp; creative</h3>
+        <ul>
+          <li>Social content (IG, TikTok, YouTube)</li>
+          <li>Personal branding</li><li>Scriptwriting &amp; storyboarding</li>
+          <li>Content planning</li><li>Video shooting</li><li>Editing (CapCut)</li>
+        </ul>
+      </div>
+      <div class="kit__col reveal" data-reveal-delay="160">
+        <h3 class="mono">Business &amp; brand</h3>
+        <ul>
+          <li>Brand communication</li><li>Long-term partnerships</li>
+          <li>Negotiation &amp; endorsement pricing</li>
+          <li>Product photo/video shoots</li><li>Project coordination</li>
+        </ul>
+      </div>
+      <div class="kit__col reveal" data-reveal-delay="240">
+        <h3 class="mono">Working style</h3>
+        <ul>
+          <li>Team collaboration</li><li>Clear communication</li>
+          <li>Time management</li><li>Easy-going, positive</li><li>Open to feedback</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="edu">
+      <h3 class="edu__h reveal"><span class="mono">Education</span></h3>
+      <ul class="edu__list">
+        <li class="reveal"><b>Bina Nusantara University</b><span>Bachelor of Computer Science, in progress</span><i class="mono">2023 — present</i></li>
+        <li class="reveal" data-reveal-delay="60"><b>SMA Marie Joseph</b><span>Science major</span><i class="mono">2020 — 2023</i></li>
+        <li class="reveal" data-reveal-delay="120"><b>SMP Santo Yakobus</b><span>Junior high</span><i class="mono">2017 — 2020</i></li>
+        <li class="reveal" data-reveal-delay="180"><b>SD Santo Yakobus</b><span>Primary</span><i class="mono">2011 — 2017</i></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section section--contact" id="contact">
+  <div class="blob blob--c" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="section__label reveal"><span class="mono">07</span> Contact</p>
+    <h2 class="contact__title reveal">
+      Let's make something<br /><span class="hl">worth pressing play on.</span>
+    </h2>
+    <p class="section__sub reveal">Fastest reply is WhatsApp. Always up for a conversation about software, basketball, or both.</p>
+
+    <div class="contact__grid">
+      <a class="contact__card reveal magnetic" href="mailto:frilliansu@gmail.com">
+        <span class="mono">Email</span><b>frilliansu@gmail.com</b>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+      </a>
+      <a class="contact__card reveal magnetic" data-reveal-delay="60" href="https://wa.me/6287768792245" target="_blank" rel="noopener">
+        <span class="mono">WhatsApp</span><b>+62 877-6879-2245</b>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+      </a>
+      <a class="contact__card reveal magnetic" data-reveal-delay="120" href="https://www.instagram.com/drillian_basketball/" target="_blank" rel="noopener">
+        <span class="mono">Instagram</span><b>@drillian_basketball</b>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+      </a>
+      <a class="contact__card reveal magnetic" data-reveal-delay="180" href="mailto:frillian@binus.ac.id">
+        <span class="mono">University</span><b>frillian@binus.ac.id</b>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <p>© <span id="year">2026</span> Frillian — Jakarta, Indonesia</p>
+    <p class="mono">Built by hand. No framework, no build step.</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
