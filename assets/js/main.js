@@ -192,8 +192,7 @@
       'Computer Science student',
       'Software Engineer Intern',
       'Basketball content creator',
-      'Brand ambassador',
-      'Apple Academy applicant'
+      'Brand ambassador'
     ];
 
     var word = $('.rotator__word', host);

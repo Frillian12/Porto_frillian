@@ -10,3 +10,6 @@ desktop.ini
 
 # Logs
 *.log
+
+# Local preview helper (not part of the site)
+serve.ps1
