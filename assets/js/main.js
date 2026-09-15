@@ -5,18 +5,25 @@
 (function () {
   'use strict';
 
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var fineQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
   var $  = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
+  /* read the preference live, so a reader who changes it mid-visit is heard */
+  function reduced() { return motionQuery.matches; }
+
   /* ---------------------------------------------------------
-     Theme — remembers the choice, otherwise follows the system
+     Theme — remembers the choice, otherwise follows the system.
+     The switch itself is eased, because an abrupt jump in page
+     brightness is uncomfortable to look at.
      --------------------------------------------------------- */
   (function theme() {
     var root = document.documentElement;
     var toggle = $('#themeToggle');
     var meta = $('meta[name="theme-color"]');
     var stored = null;
+    var timer = null;
 
     try { stored = localStorage.getItem('frillian-theme'); } catch (e) {}
 
@@ -31,6 +38,17 @@
     if (toggle) {
       toggle.addEventListener('click', function () {
         var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+
+        /* colours cross-fade for the length of the switch and no longer, so
+           hover states never inherit a transition they did not ask for */
+        if (!reduced()) {
+          root.classList.add('theme-anim');
+          window.clearTimeout(timer);
+          timer = window.setTimeout(function () {
+            root.classList.remove('theme-anim');
+          }, 320);
+        }
+
         apply(next);
         try { localStorage.setItem('frillian-theme', next); } catch (e) {}
       });
@@ -53,7 +71,11 @@
       var y = window.scrollY || window.pageYOffset;
       var max = document.documentElement.scrollHeight - window.innerHeight;
 
-      if (bar) bar.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+      /* scaleX rather than width: nothing on the scroll path should relayout */
+      if (bar) {
+        var p = max > 0 ? Math.min(Math.max(y / max, 0), 1) : 0;
+        bar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+      }
       if (header) header.classList.toggle('is-stuck', y > 24);
 
       var current = null;
@@ -77,7 +99,8 @@
   })();
 
   /* ---------------------------------------------------------
-     Mobile menu
+     Mobile menu — the panel itself is animated in CSS so it can
+     be interrupted; this only owns the state.
      --------------------------------------------------------- */
   (function burger() {
     var btn = $('#burger');
@@ -89,13 +112,19 @@
       btn.setAttribute('aria-expanded', 'false');
     }
 
-    btn.addEventListener('click', function () {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
       var open = menu.classList.toggle('is-open');
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
 
     menu.addEventListener('click', function (e) {
       if (e.target.tagName === 'A') close();
+    });
+
+    /* never trap the reader in an open menu */
+    document.addEventListener('click', function (e) {
+      if (menu.classList.contains('is-open') && !menu.contains(e.target)) close();
     });
 
     document.addEventListener('keydown', function (e) {
@@ -114,7 +143,7 @@
       if (d) el.style.setProperty('--d', d + 'ms');
     });
 
-    if (reduceMotion || !('IntersectionObserver' in window)) {
+    if (reduced() || !('IntersectionObserver' in window)) {
       items.forEach(function (el) { el.classList.add('is-in'); });
       return;
     }
@@ -131,7 +160,8 @@
   })();
 
   /* ---------------------------------------------------------
-     Counters — animate once, when scrolled into view
+     Counters — animate once, when scrolled into view.
+     Explanatory rather than interactive, so it can take its time.
      --------------------------------------------------------- */
   (function counters() {
     var nums = $$('[data-count]');
@@ -148,7 +178,7 @@
       var target = parseFloat(el.getAttribute('data-count'));
       if (isNaN(target)) return;
 
-      if (reduceMotion) { el.textContent = format(el, target); return; }
+      if (reduced()) { el.textContent = format(el, target); return; }
 
       var duration = 1500;
       var start = null;
@@ -182,7 +212,8 @@
   })();
 
   /* ---------------------------------------------------------
-     Hero role rotator
+     Hero role rotator — the word leaves upward and the next one
+     arrives from below, so the strip only ever travels one way.
      --------------------------------------------------------- */
   (function rotator() {
     var host = $('#rotator');
@@ -196,46 +227,75 @@
     ];
 
     var word = $('.rotator__word', host);
-    if (!word || reduceMotion) return;
+    if (!word || reduced()) return;
 
     var i = 0;
-    setInterval(function () {
-      word.classList.add('is-out');
-      setTimeout(function () {
+    var timer = null;
+
+    function step() {
+      word.classList.add('is-out');                 /* leaves upward */
+      window.setTimeout(function () {
         i = (i + 1) % words.length;
         word.textContent = words[i];
         word.classList.remove('is-out');
-      }, 320);
-    }, 2800);
+        word.classList.add('is-next');              /* parked below, untransitioned */
+        void word.offsetWidth;                      /* commit that position */
+        word.classList.remove('is-next');           /* then ride up into place */
+      }, 200);                                      /* matches --t-hover */
+    }
+
+    function start() { if (!timer) timer = window.setInterval(step, 2800); }
+    function stop() { window.clearInterval(timer); timer = null; }
+
+    /* a throttled background tab would otherwise queue up a burst of swaps */
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stop(); else start();
+    });
+
+    start();
   })();
 
   /* ---------------------------------------------------------
-     Magnetic buttons + custom cursor (pointer devices only)
+     Pointer flourishes — cursor ring and magnetic buttons.
+
+     Both are springs rather than scripted animations: a spring
+     always starts from where the element currently is, so it can
+     be grabbed, reversed and re-aimed mid-flight without a jump.
      --------------------------------------------------------- */
   (function pointerFx() {
-    var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (!fine || reduceMotion) return;
+    if (!fineQuery.matches || reduced()) return;
 
-    /* cursor ring, eased toward the real pointer */
+    /* ---- cursor ring ---- */
     var ring = $('#cursorRing');
     if (ring) {
       var tx = -100, ty = -100, cx = -100, cy = -100;
+      var last = 0, idle = true;
+
+      function loop(now) {
+        var dt = last ? Math.min((now - last) / 1000, 0.05) : 1 / 60;
+        last = now;
+
+        /* exponential smoothing by elapsed time, so the ring trails the
+           pointer identically on a 60Hz and a 120Hz display */
+        var k = 1 - Math.exp(-dt / 0.084);
+        cx += (tx - cx) * k;
+        cy += (ty - cy) * k;
+        /* 29 = half the ring's fixed 58px box, so it stays centred on the pointer */
+        ring.style.transform = 'translate(' + (cx - 29).toFixed(2) + 'px,' + (cy - 29).toFixed(2) + 'px)';
+
+        if (Math.abs(tx - cx) < 0.1 && Math.abs(ty - cy) < 0.1) { idle = true; return; }
+        window.requestAnimationFrame(loop);
+      }
 
       document.addEventListener('mousemove', function (e) {
         tx = e.clientX; ty = e.clientY;
         ring.classList.add('is-on');
+        if (idle) { idle = false; last = 0; window.requestAnimationFrame(loop); }
       }, { passive: true });
 
       document.addEventListener('mouseleave', function () {
         ring.classList.remove('is-on');
       });
-
-      (function loop() {
-        cx += (tx - cx) * 0.18;
-        cy += (ty - cy) * 0.18;
-        ring.style.transform = 'translate(' + (cx - 15) + 'px,' + (cy - 15) + 'px)';
-        window.requestAnimationFrame(loop);
-      })();
 
       $$('a, button, .card, .proj, .num').forEach(function (el) {
         el.addEventListener('mouseenter', function () { ring.classList.add('is-big'); });
@@ -243,17 +303,73 @@
       });
     }
 
-    /* magnetic pull on the primary calls to action */
+    /* ---- a critically damped spring ----
+       `response` is roughly how long it takes to arrive, in seconds. Damping
+       is fixed at critical: it settles quickly and never overshoots, which is
+       right for anything that is following a pointer rather than being thrown. */
+    function Spring(response, value) {
+      this.w = (2 * Math.PI) / response;
+      this.x = value || 0;
+      this.v = 0;
+      this.target = this.x;
+    }
+    Spring.prototype.step = function (dt) {
+      var a = -2 * this.w * this.v - this.w * this.w * (this.x - this.target);
+      this.v += a * dt;
+      this.x += this.v * dt;
+    };
+    Spring.prototype.settled = function (eps) {
+      return Math.abs(this.v) < eps && Math.abs(this.x - this.target) < eps;
+    };
+
+    /* ---- magnetic buttons ---- */
     $$('.magnetic').forEach(function (el) {
+      var mx = new Spring(0.35, 0);
+      var my = new Spring(0.35, 0);
+      var press = new Spring(0.16, 1);
+      var running = false;
+      var last = 0;
+
+      el.classList.add('is-spring');
+
+      function frame(now) {
+        var dt = last ? Math.min((now - last) / 1000, 0.032) : 1 / 60;
+        last = now;
+
+        mx.step(dt); my.step(dt); press.step(dt);
+        el.style.transform =
+          'translate3d(' + mx.x.toFixed(2) + 'px,' + my.x.toFixed(2) + 'px,0) ' +
+          'scale(' + press.x.toFixed(4) + ')';
+
+        if (mx.settled(0.01) && my.settled(0.01) && press.settled(0.0005)) {
+          running = false; last = 0; return;
+        }
+        window.requestAnimationFrame(frame);
+      }
+
+      function run() {
+        if (running) return;
+        running = true; last = 0;
+        window.requestAnimationFrame(frame);
+      }
+
       el.addEventListener('mousemove', function (e) {
         var r = el.getBoundingClientRect();
-        var dx = e.clientX - (r.left + r.width / 2);
-        var dy = e.clientY - (r.top + r.height / 2);
-        el.style.transform = 'translate(' + dx * 0.18 + 'px,' + dy * 0.28 + 'px)';
+        mx.target = (e.clientX - (r.left + r.width / 2)) * 0.18;
+        my.target = (e.clientY - (r.top + r.height / 2)) * 0.28;
+        run();
       });
+
       el.addEventListener('mouseleave', function () {
-        el.style.transform = '';
+        mx.target = 0; my.target = 0; press.target = 1;
+        run();
       });
+
+      /* the press rides the same spring as the pull, so letting go part-way
+         through a drag blends instead of cutting to a new animation */
+      el.addEventListener('pointerdown', function () { press.target = 0.97; run(); });
+      window.addEventListener('pointerup', function () { press.target = 1; run(); });
+      el.addEventListener('pointercancel', function () { press.target = 1; run(); });
     });
   })();
 
@@ -262,15 +378,14 @@
      --------------------------------------------------------- */
   (function parallax() {
     var portrait = $('#portrait');
-    if (!portrait || reduceMotion) return;
+    if (!portrait || reduced()) return;
 
     var ticking = false;
 
     function update() {
       var y = window.scrollY || window.pageYOffset;
       if (y < window.innerHeight * 1.2) {
-        portrait.style.setProperty('--py', (y * 0.045) + 'px');
-        portrait.style.translate = '0 ' + (y * -0.045) + 'px';
+        portrait.style.translate = '0 ' + (y * -0.045).toFixed(2) + 'px';
       }
       ticking = false;
     }
